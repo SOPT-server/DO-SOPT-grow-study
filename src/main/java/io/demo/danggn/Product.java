@@ -1,4 +1,4 @@
-package io.demo.danggn.entity;
+package io.demo.danggn;
 
 import jakarta.persistence.*;
 
@@ -19,14 +19,27 @@ public class Product {
     private String description;
     private int price;
 
+    private boolean isSuggested;
+
+    private Long memberId;
+
     protected Product() {
     }
 
-    public Product(String title, String content, TradeMethod method, String description, int price) {
+    public Product(String title,
+                   TradeMethod method,
+                   String description,
+                   int price,
+                   boolean isSuggested) {
         this.title = title;
-        this.content = content;
         this.method = method;
         this.description = description;
         this.price = price;
+        this.isSuggested = isSuggested;
+    }
+
+
+    public Long getId() {
+        return id;
     }
 }

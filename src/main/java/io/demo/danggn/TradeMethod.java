@@ -1,4 +1,4 @@
-package io.demo.danggn.entity;
+package io.demo.danggn;
 
 public enum TradeMethod {
     SHARE, SALE
