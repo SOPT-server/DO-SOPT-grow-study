@@ -1,4 +1,4 @@
-package io.demo.danggn;
+package io.demo.danggn.dto;
 
 public record ProductResponse(
         Long productId

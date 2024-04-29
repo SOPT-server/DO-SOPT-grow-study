@@ -1,4 +1,6 @@
-package io.demo.danggn;
+package io.demo.danggn.dto;
+
+import io.demo.danggn.entity.TradeMethod;
 
 public record ProductRequest(
     String title,
