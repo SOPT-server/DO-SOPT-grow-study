@@ -22,7 +22,11 @@ Test Code를 짜야지... 짜야지 ... 하면서도 Test를 소홀히 했던 �
 만약 구현 요구사항이 애매한 경우에 Test를 짜면서 내가 구현해야할 기능도 조금 더 구체화 할 수 있습니다.
 
 
-#### Test Tool
+## Test Tool
+Java에서 사용하는 Test Framwork의 대표로 JUnit이 있습니다. 
+Spring Boot 프로젝트를 생성하면 JUnit5가 기본적으로 셋업됩니다.
+또한 AssertJ라는 Test Framework 또한 Spring Boot Test에 포함되어 있어 사용할 수 있습니다 ~
+
 - [JUnit5](https://junit.org/junit5/docs/current/user-guide/)
 - [AssertJ](https://assertj.github.io/doc/)
 - [Mockito](https://site.mockito.org/)
