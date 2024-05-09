@@ -131,9 +131,9 @@ public class Member extends BaseTimeEntity {
 }
 ```
 
-#### Domain Test
+#### Entity Test
 
-Entity 
+Entity에서 회원 나이를 제한에 대한 Test code 작성
 
 ```Java
     @Test
