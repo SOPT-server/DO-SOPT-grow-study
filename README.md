@@ -48,6 +48,28 @@ void test() throws Exception {
 
 #### Spring Boot에서의 Test
 - Spring Boot Test에서는 기본적으로 `@SpringBootTest`를 사용하여 테스트를 작성함.
+- Test 환경을 구축하기 위해서, H2 기반으로 설정 파일을 만들고 Test를 작성하면 편한 것 같습니다!
+```yml
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+```
 
 
 ### Layered Architecture 정리
