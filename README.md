@@ -102,7 +102,7 @@ public class Member extends BaseTimeEntity {
         }
     }
 
-    // SOPT는 한국인만 가입 가능함.
+    // 요구사항 : SOPT는 한국인만 가입 가능함.
     private void validateName(final String name) {
         if (NAME_PATTERN.matcher(name).matches()) {
             throw new MemberException("유저의 이름은 한글만 가능합니다.");
@@ -362,5 +362,50 @@ public class MemberControllerTest extends ControllerTestManager {
 
 - Request -> Controller -> Service -> Repository -> Service -> Controller -> Response
 
+```Java
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+public class MemberApiIntegrationTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    MemberJpaRepository memberJpaRepository;
+
+    @Test
+    @DisplayName("특정 회원 정보를 조회한다.")
+    void test() throws Exception {
+
+        Member savedMember = memberJpaRepository.save(
+                com.example.seminar.domain.Member.builder()
+                        .name("오해영")
+                        .age(28)
+                        .sopt(
+                                com.example.seminar.domain.SOPT.builder()
+                                        .part(com.example.seminar.domain.Part.DESIGN)
+                                        .build()
+                        )
+                        .nickname("5hae0")
+                        .build()
+        );
+        long savedMemberId = savedMember.getId();
+
+      // given
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/api/member/" + savedMemberId)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("오해영"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(28))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.soptInfo.part").value("DESIGN"))
+                .andExpect(MockMvcResultMatchers.jsonPath("soptInfo.generation").value(34));
+    }
+
+}
+
+```
 
 Test Coverage 확보를 위해서 통합 테스트 또한 작성할 수 있습니다.
