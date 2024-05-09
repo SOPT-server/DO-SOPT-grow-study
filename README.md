@@ -328,7 +328,8 @@ public class MemberServiceTest {
 
 ## Controller Test
 - Controller 계층 Test를 할 때는 `@WebMvcTest`를 사용하여 Test 할 수 있습니다.
-  - Service를 Mocking하고 Test
+  - Service를 Mocking하고 Test하는 형태로 구성했습니다.
+ 
 
 ```Java
 @WebMvcTest(controllers = MemberController.class)
@@ -395,6 +396,20 @@ public class MemberControllerTest extends ControllerTestManager {
 }
 ```
 
+API 구현이 많아지다 보면 ControllerTest 클래스도 자연스럽게 많아지기 때문에, `ControllerTestManager`라는 클래스를 만들어서 Test 환경을 통합하여 관리할 수 있습니다.
+```Java
+@WebMvcTest
+@ActiveProfiles("test")
+public class ControllerTestManager {
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+}
+
+```
 
 
 ## 통합 테스트
