@@ -131,7 +131,9 @@ public class Member extends BaseTimeEntity {
 }
 ```
 
-Domain Test
+#### Domain Test
+
+Entity 
 
 ```Java
     @Test
@@ -158,6 +160,16 @@ Domain Test
 
 
 ## Repository
+```Java
+public interface MemberJpaRepository extends JpaRepository<Member, Long> {
+
+    default Member findByIdOrThrow(Long id) {
+        return findById(id).orElseThrow(
+                () -> new EntityNotFoundException("존재하지 않는 회원입니다."));
+    }
+}
+
+```
 
 ### Repository Test
 
