@@ -131,6 +131,31 @@ public class Member extends BaseTimeEntity {
 }
 ```
 
+Domain Test
+
+```Java
+    @Test
+    @DisplayName("100살이 넘은 사용자는 회원가입을 할 수 없다.")
+    void memberRegister() {
+        Assertions.assertThatThrownBy(
+                () -> {
+                    SOPT sopt = SOPT.builder()
+                            .part(Part.SERVER)
+                            .build();
+
+                    Member member = Member.builder()
+                            .age(101)
+                            .name("오해영")
+                            .sopt(sopt)
+                            .nickname("5hae0")
+                            .build();
+
+                }
+        ).isInstanceOf(MemberException.class)
+        .hasMessage("회원의 나이는 0세 이상 100세 이하입니다.");
+    }
+```
+
 
 ## Repository
 
@@ -358,8 +383,7 @@ public class MemberControllerTest extends ControllerTestManager {
 
 
 ## 통합 테스트
-- 각각의 계층별로 Test를 진행했지만, 모의 객체를 사용한 부분도 있고 각각의 계층에서는 문제가 없지만, 실제 동작할 때 문제가 생기는 상황들도 존재한다. 이를 줄이기 위해서 통합 테스트를 작성할 수 있다.
-
+- 각각의 계층별로 Test를 진행했지만, 모의 객체를 사용한 부분도 있고 각각의 계층에서는 문제가 없지만, 실제 동작할 때 문제가 생기는 상황들도 존재한다. 이를 줄이기 위해서 통합 테스트를 작성할 수 있습니다.
 - Request -> Controller -> Service -> Repository -> Service -> Controller -> Response
 
 ```Java
@@ -408,4 +432,4 @@ public class MemberApiIntegrationTest {
 
 ```
 
-Test Coverage 확보를 위해서 통합 테스트 또한 작성할 수 있습니다.
+
