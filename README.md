@@ -487,3 +487,6 @@ public class MemberApiIntegrationTest {
 }
 
 ```
+
+### Test를 짜면서 느낀 것 ...
+- Test 방법에는 정답이 없지만, 구현된 기능들을 문제 없이 Test하고 저비용으로 Test 할 수 있는 방법에 대해서 지속적으로 고민하고 작성해보는 것이 좋은 것 같습니다.
